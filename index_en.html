@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Michel Pabst — AI First (Organic)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f0f7f4;
+            --surface: #fff;
+            --text: #1e3a2f;
+            --muted: #5a7d6c;
+            --green: #2d6a4f;
+            --teal: #40916c;
+            --sage: #95d5b2;
+            --cream: #fefae0;
+            --border: #d8e2dc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        ::selection {
+            background: var(--sage);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Blob shapes */
+        .blob {
+            position: fixed;
+            border-radius: 50% 40% 60% 50% / 60% 50% 40% 50%;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--sage);
+            top: -150px;
+            left: -150px;
+            animation: morph 15s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--teal);
+            bottom: -100px;
+            right: -100px;
+            animation: morph 12s ease-in-out infinite reverse;
+        }
+
+        @keyframes morph {
+
+            0%,
+            100% {
+                border-radius: 50% 40% 60% 50% / 60% 50% 40% 50%
+            }
+
+            50% {
+                border-radius: 40% 60% 50% 50% / 50% 40% 60% 50%
+            }
+        }
+
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            width: calc(100% - 48px);
+            max-width: 900px;
+        }
+
+        .header-pill {
+            background: var(--surface);
+            border-radius: 100px;
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 24px rgba(45, 106, 79, 0.1);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .btn {
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 100px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-green {
+            background: var(--green);
+            color: #fff;
+        }
+
+        .btn-green:hover {
+            background: var(--teal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(45, 106, 79, 0.25);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 0 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .wave-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: var(--cream);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 24px;
+        }
+
+        .wave-badge svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        h1 {
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h1 span {
+            color: var(--green);
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
+
+        .hero-desc strong {
+            color: var(--text);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .portrait-organic {
+            position: relative;
+        }
+
+        .portrait-blob {
+            position: absolute;
+            inset: -30px;
+            background: linear-gradient(135deg, var(--sage), var(--teal));
+            border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+            animation: morph 10s ease-in-out infinite;
+        }
+
+        .portrait-organic img {
+            position: relative;
+            width: 100%;
+            border-radius: 50%;
+            border: 6px solid var(--surface);
+            box-shadow: 0 12px 32px rgba(45, 106, 79, 0.2);
+        }
+
+        .stats-pills {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat-pill {
+            background: var(--surface);
+            border-radius: 100px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 16px rgba(45, 106, 79, 0.08);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-tag {
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--teal);
+            margin-bottom: 12px;
+        }
+
+        h2 {
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+        }
+
+        .section-desc {
+            color: var(--muted);
+            font-size: 17px;
+            margin-top: 12px;
+        }
+
+        .wave-divider {
+            height: 80px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23fff' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+
+        .wave-divider-reverse {
+            transform: scaleY(-1);
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f0f7f4' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background-size: cover;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.06);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(45, 106, 79, 0.12);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--sage), var(--teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .card-tag {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--teal);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            background: var(--bg);
+            border-radius: 100px;
+            color: var(--muted);
+        }
+
+        /* VENTURES */
+        .ventures-section {
+            background: var(--surface);
+            padding: 100px 0;
+        }
+
+        .venture-card {
+            background: var(--bg);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.3s;
+        }
+
+        .venture-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(45, 106, 79, 0.1);
+        }
+
+        .venture-card.featured {
+            background: linear-gradient(135deg, rgba(149, 213, 178, 0.3), rgba(64, 145, 108, 0.1));
+        }
+
+        .venture-status {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--green);
+            padding: 6px 14px;
+            background: var(--cream);
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .venture-card h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .venture-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .venture-highlight {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .process-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.06);
+        }
+
+        .process-num {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--teal));
+            color: #fff;
+            font-size: 24px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .process-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .process-card p {
+            color: var(--muted);
+            font-size: 15px;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--green), var(--teal));
+            border-radius: 32px;
+            padding: 60px;
+            color: #fff;
+        }
+
+        .cta-card h2 {
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .cta-card p {
+            opacity: 0.9;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-card .btn-green {
+            background: #fff;
+            color: var(--green);
+        }
+
+        .cta-card .btn-outline {
+            border-color: rgba(255, 255, 255, 0.4);
+            color: #fff;
+        }
+
+        .contact-box {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(45, 106, 79, 0.06);
+        }
+
+        .contact-box h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-list li:last-child {
+            border: none;
+        }
+
+        .contact-list a:hover {
+            color: var(--green);
+        }
+
+        .contact-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--sage), var(--teal));
+        }
+
+        footer {
+            padding: 48px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .footer-links a:hover {
+            color: var(--green);
+        }
+
+        @media (max-width:900px) {
+            header {
+                width: calc(100% - 32px);
+                top: 12px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portrait-organic {
+                max-width: 260px;
+                margin: 40px auto 0;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats-pills {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header>
+        <div class="header-pill">
+            <div class="logo">Michel Pabst</div>
+            <div class="nav-links"><a href="#ventures">Ventures</a><a href="#produtos">Products</a><a
+                    href="#consultoria">Consulting</a><a href="#contato">Contact</a></div>
+            <a href="https://www.linkedin.com/in/michelpabst/" target="_blank" class="btn btn-green">LinkedIn</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <div class="wave-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                            </svg>
+                            AI First · AI Builder
+                        </div>
+                        <h1>AI First. <span>From zero</span><br />to deploy.</h1>
+                        <p class="hero-desc">I am <strong>Michel Pabst</strong>, AI Builder & Cloud Architect.
+                            Specialist in taking AI to the real world. I transform complex problems into functional
+                            AI products.</p>
+                        <div class="hero-actions">
+                            <a href="https://www.linkedin.com/in/michelpabst/" target="_blank"
+                                class="btn btn-green">LinkedIn →</a>
+                            <a href="#ventures" class="btn btn-outline">See ventures</a>
+                        </div>
+                        <div class="stats-pills">
+                            <div class="stat-pill"><span class="stat-value">15+</span><span class="stat-label">AI Products
+                                    </span></div>
+                            <div class="stat-pill"><span class="stat-value">4</span><span class="stat-label">Founded
+                                    Startups</span></div>
+                            <div class="stat-pill"><span class="stat-value">10+</span><span
+                                    class="stat-label">Years Exp</span></div>
+                        </div>
+                    </div>
+                    <div class="portrait-organic">
+                        <div class="portrait-blob"></div>
+                        <img src="michel-circle.png" alt="Michel Pabst"
+                            style="background:rgba(255,255,255,0.2); backdrop-filter:blur(5px);" />
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <div class="wave-divider"></div>
+
+        <section id="produtos">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Products</div>
+                    <h2>In Production</h2>
+                </div>
+                <div class="grid-2">
+                    <article class="card">
+                        <div class="card-icon">🌾</div>
+                        <div class="card-tag">Agro / Vision</div>
+                        <h3><a href="https://zapsafra.com" target="_blank"
+                                style="text-decoration:none; color:inherit;">Zap Safra</a></h3>
+                        <p>Digital agronomist on WhatsApp with Gemini 3.0 and computer vision.</p>
+                        <div class="tech-tags"><span class="tag">Vision</span><span class="tag">Analytics</span><span
+                                class="tag">Cloud Run</span></div>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">💾</div>
+                        <div class="card-tag">Infra</div>
+                        <h3><a href="https://bkpexpress.com" target="_blank"
+                                style="text-decoration:none; color:inherit;">BKP Express</a></h3>
+                        <p>Smart backup for Workspace. 60-80% savings vs Archived Users.</p>
+                        <div class="tech-tags"><span class="tag">Automation</span><span class="tag">Security</span>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">💊</div>
+                        <div class="card-tag">Pharma</div>
+                        <h3>Enterprise RAG Hub</h3>
+                        <p>Smart search in corporate knowledge bases.</p>
+                        <div class="tech-tags"><span class="tag">RAG</span><span class="tag">Gemini</span></div>
+                    </article>
+                    <article class="card">
+                        <div class="card-icon">🍺</div>
+                        <div class="card-tag">BevTech</div>
+                        <h3>Gondola AI</h3>
+                        <p>Shelf vision and execution.</p>
+                        <div class="tech-tags"><span class="tag">Vision</span><span class="tag">Edge AI</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Portfolio</div>
+                    <h2>Delivered Projects</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                    <div class="card">
+                        <div class="card-tag">Retail</div>
+                        <h3>Supermarket AI</h3>
+                        <p>Computer vision for shelf auditing and out-of-stock detection.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-tag">Industry</div>
+                        <h3>Check AI</h3>
+                        <p>Visual inspection on production lines.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-tag">Finance</div>
+                        <h3>Banker Agent</h3>
+                        <p>GenAI for automated analysis.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-tag">Health</div>
+                        <h3>Health AI</h3>
+                        <p>Semantic search and decision support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ventures-section" id="ventures">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Ventures</div>
+                    <h2>Founded Startups</h2>
+                    <p class="section-desc">Innovation track record: ability to transform ideas into scalable
+                        businesses.</p>
+                </div>
+                <div class="grid-2">
+                    <article class="venture-card featured">
+                        <div class="venture-status">Exit</div>
+                        <h3>CloudPlain</h3>
+                        <p>Cloud routine automation.</p>
+                        <div class="venture-highlight">💰 Startup sold</div>
+                    </article>
+                    <article class="venture-card">
+                        <div class="venture-status">Accelerated</div>
+                        <h3><a href="https://cloudcontrol.app" target="_blank"
+                                style="text-decoration:none; color:inherit;">CloudControl</a></h3>
+                        <p>All-in-One platform for Cloud partners. Accelerated by Builder Culture + AWS.</p>
+                        <div class="venture-highlight">🚀 Launch Q1 2026</div>
+                    </article>
+                    <article class="venture-card">
+                        <div class="venture-status">Pioneer</div>
+                        <h3>IPE Assets</h3>
+                        <p>Energy tokenization. +R$ 2M raised, 4 plants, 1 charging station. Global clients (USA,
+                            Europe, Asia).</p>
+                        <div class="venture-highlight">☀️ World 1st</div>
+                    </article>
+                    <article class="venture-card">
+                        <div class="venture-status">Awarded</div>
+                        <h3>Trazzelo</h3>
+                        <p>Elderly care.</p>
+                        <div class="venture-highlight">🏆 R$100k Grant</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="wave-divider-reverse"></div>
+
+        <section id="consultoria">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Consulting</div>
+                    <h2>How I can help</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-icon">🔍</div>
+                        <h3>RAG & Search</h3>
+                        <p>Knowledge base with evaluation.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤖</div>
+                        <h3>Agents</h3>
+                        <p>Workflows with guardrails.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">👥</div>
+                        <h3>Mentorship & Enablement</h3>
+                        <p>Team training. Shipping culture.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">☁️</div>
+                        <h3>AI Engineering</h3>
+                        <p>Infrastructure for inference and vectors.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>AI MVP</h3>
+                        <p>From idea to MVP in 2-4 weeks.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🛠️</div>
+                        <h3>LLMOps</h3>
+                        <p>Observability and Evals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Process</div>
+                    <h2>How it works</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="process-card">
+                        <div class="process-num">1</div>
+                        <h3>Diagnosis</h3>
+                        <p>Use case definition, data availability, and ROI calculation.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="process-num">2</div>
+                        <h3>MVP</h3>
+                        <p>Rapid construction and deployment to validate value.</p>
+                    </div>
+                    <div class="process-card">
+                        <div class="process-num">3</div>
+                        <h3>Scale</h3>
+                        <p>Governance, optimization, and handover to the team.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container">
+                <div class="cta-card">
+                    <h2>Ready to put AI into production?</h2>
+                    <p>Get in touch to schedule a diagnosis.</p>
+                    <div class="cta-actions">
+                        <a href="https://www.linkedin.com/in/michelpabst/" target="_blank"
+                            class="btn btn-green">LinkedIn
+                            →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">Contact</div>
+                    <h2>Let's talk</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="contact-box">
+                        <h3>For Companies</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <div class="contact-dot"></div>Use case definition
+                            </li>
+                            <li>
+                                <div class="contact-dot"></div>Data mapping
+                            </li>
+                            <li>
+                                <div class="contact-dot"></div>AI & Cloud Architecture
+                            </li>
+                            <li>
+                                <div class="contact-dot"></div>MVP Plan
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="contact-box">
+                        <h3>Direct Contact</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <div class="contact-dot"></div><a href="https://www.linkedin.com/in/michelpabst"
+                                    target="_blank">LinkedIn</a>
+                            </li>
+                            <li>
+                                <div class="contact-dot"></div>PT / EN / ES
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">© 2026 Michel Pabst</div>
+            <div class="footer-links"><a href="https://www.linkedin.com/in/michelpabst">LinkedIn</a><a
+                    href="Curri_culo_Michel_Pabst.pdf">CV</a></div>
+        </div>
+    </footer>
+</body>
+
+</html>
