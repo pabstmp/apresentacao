@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Michel Pabst — AI First (Neubrutalism)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fffef9;
+            --black: #1a1a1a;
+            --yellow: #ffe156;
+            --pink: #ff6b9d;
+            --blue: #56c1ff;
+            --green: #7bed9f;
+            --shadow: 4px 4px 0 var(--black);
+            --shadow-lg: 8px 8px 0 var(--black);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg);
+            color: var(--black);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        ::selection {
+            background: var(--yellow);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: var(--bg);
+            border-bottom: 3px solid var(--black);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 24px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+        }
+
+        .btn {
+            font-family: 'Work Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 14px 28px;
+            border: 3px solid var(--black);
+            background: var(--yellow);
+            color: var(--black);
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.1s;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--black);
+        }
+
+        .btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: none;
+        }
+
+        .btn-pink {
+            background: var(--pink);
+        }
+
+        .btn-blue {
+            background: var(--blue);
+        }
+
+        .btn-white {
+            background: var(--bg);
+        }
+
+        .hero {
+            min-height: 100vh;
+            padding: 120px 0 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .tag-brutal {
+            display: inline-block;
+            padding: 8px 16px;
+            background: var(--pink);
+            border: 3px solid var(--black);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+            transform: rotate(-2deg);
+        }
+
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(48px, 7vw, 90px);
+            line-height: 0.95;
+            margin-bottom: 24px;
+        }
+
+        h1 .highlight {
+            background: var(--yellow);
+            padding: 0 8px;
+            display: inline-block;
+            transform: rotate(1deg);
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            margin-bottom: 32px;
+            max-width: 500px;
+        }
+
+        .hero-desc strong {
+            background: var(--green);
+            padding: 0 4px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .portrait-brutal {
+            position: relative;
+        }
+
+        .portrait-brutal img {
+            width: 100%;
+            border: 4px solid var(--black);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portrait-badge {
+            position: absolute;
+            bottom: -16px;
+            right: -16px;
+            background: var(--blue);
+            border: 3px solid var(--black);
+            padding: 12px 16px;
+            font-weight: 700;
+            font-size: 14px;
+            transform: rotate(3deg);
+            box-shadow: var(--shadow);
+        }
+
+        .stats-brutal {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: var(--green);
+            border: 3px solid var(--black);
+            padding: 20px 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-box:nth-child(2) {
+            background: var(--blue);
+            transform: rotate(-1deg);
+        }
+
+        .stat-box:nth-child(3) {
+            background: var(--pink);
+            transform: rotate(1deg);
+        }
+
+        .stat-box:nth-child(4) {
+            background: var(--yellow);
+            transform: rotate(-2deg);
+        }
+
+        .stat-value {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 36px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            margin-bottom: 48px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: var(--black);
+            color: var(--bg);
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .card-brutal {
+            background: var(--bg);
+            border: 3px solid var(--black);
+            padding: 28px;
+            box-shadow: var(--shadow);
+            transition: all 0.1s;
+        }
+
+        .card-brutal:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--black);
+        }
+
+        .card-brutal:nth-child(odd) {
+            transform: rotate(-0.5deg);
+        }
+
+        .card-brutal:nth-child(even) {
+            transform: rotate(0.5deg);
+        }
+
+        .card-brutal:hover {
+            transform: rotate(0) translate(2px, 2px);
+        }
+
+        .card-tag {
+            display: inline-block;
+            background: var(--yellow);
+            padding: 4px 10px;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            border: 2px solid var(--black);
+        }
+
+        .card-brutal h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .card-brutal p {
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .tech-brutal {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tech-brutal span {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 6px 10px;
+            background: var(--bg);
+            border: 2px solid var(--black);
+        }
+
+        /* VENTURES */
+        .ventures-brutal {
+            background: var(--yellow);
+            border-top: 4px solid var(--black);
+            border-bottom: 4px solid var(--black);
+            padding: 80px 0;
+        }
+
+        .venture-card {
+            background: var(--bg);
+            border: 4px solid var(--black);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .venture-card.exit {
+            background: var(--green);
+        }
+
+        .venture-status {
+            position: absolute;
+            top: -14px;
+            right: 20px;
+            background: var(--black);
+            color: var(--bg);
+            padding: 8px 16px;
+            font-weight: 700;
+            font-size: 12px;
+            transform: rotate(2deg);
+        }
+
+        .venture-card h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 28px;
+            margin-bottom: 8px;
+            margin-top: 12px;
+        }
+
+        .venture-card p {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .venture-highlight {
+            font-weight: 700;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .process-brutal {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .process-step {
+            text-align: center;
+            max-width: 280px;
+        }
+
+        .process-num {
+            width: 80px;
+            height: 80px;
+            background: var(--pink);
+            border: 4px solid var(--black);
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: var(--shadow);
+            transform: rotate(-3deg);
+        }
+
+        .process-step:nth-child(2) .process-num {
+            background: var(--blue);
+            transform: rotate(2deg);
+        }
+
+        .process-step:nth-child(3) .process-num {
+            background: var(--green);
+            transform: rotate(-1deg);
+        }
+
+        .process-step h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .process-step p {
+            font-size: 14px;
+        }
+
+        .cta-brutal {
+            background: var(--black);
+            color: var(--bg);
+            padding: 80px 24px;
+            text-align: center;
+            border: 4px solid var(--black);
+        }
+
+        .cta-brutal h2 {
+            color: var(--bg);
+            margin-bottom: 16px;
+        }
+
+        .cta-brutal p {
+            font-size: 18px;
+            margin-bottom: 32px;
+            opacity: 0.8;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-brutal {
+            background: var(--bg);
+            border: 4px solid var(--black);
+            padding: 32px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-brutal h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-list li {
+            padding: 14px 0;
+            border-bottom: 2px dashed var(--black);
+            font-size: 15px;
+        }
+
+        .contact-list li:last-child {
+            border: none;
+        }
+
+        .contact-list a:hover {
+            background: var(--yellow);
+        }
+
+        footer {
+            padding: 32px 0;
+            border-top: 4px solid var(--black);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+        }
+
+        @media (max-width:800px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portrait-brutal {
+                max-width: 260px;
+                margin-top: 32px;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">MP</div>
+            <div class="nav-links"><a href="#ventures">Ventures</a><a href="#produtos">Produtos</a><a
+                    href="#consultoria">Consultoria</a><a href="#contato">Contato</a></div>
+            <a href="https://www.linkedin.com/in/michelpabst/" target="_blank" class="btn">LINKEDIN</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <div class="tag-brutal">AI FIRST · AI BUILDER</div>
+                        <h1>AI <span class="highlight">FIRST.</span> DO ZERO AO DEPLOY.</h1>
+                        <p class="hero-desc">Sou <strong>Michel Pabst</strong>, AI Builder & Cloud Architect.
+                            Especialista em levar AI para o mundo real. Transformo problemas complexos em produtos de AI
+                            funcionais.</p>
+                        <div class="hero-actions">
+                            <a href="https://www.linkedin.com/in/michelpabst/" target="_blank" class="btn">AGENDAR
+                                DIAGNÓSTICO</a>
+                            <a href="#ventures" class="btn btn-white">VER VENTURES</a>
+                        </div>
+                        <div class="stats-brutal">
+                            <div class="stat-box">
+                                <div class="stat-value">15+</div>
+                                <div class="stat-label">Produtos de AI</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">4</div>
+                                <div class="stat-label">Startups</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-value">10+</div>
+                                <div class="stat-label">Anos</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="portrait-brutal">
+                        <img src="michel-circle.png" alt="Michel Pabst" style="background:var(--blue);" />
+                        <div class="portrait-badge">🌎 REMOTE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="produtos">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">PRODUTOS</div>
+                    <h2>EM PRODUÇÃO</h2>
+                </div>
+                <div class="grid-2">
+                    <article class="card-brutal">
+                        <div class="card-tag">AGRO / VISION</div>
+                        <h3><a href="https://zapsafra.com" target="_blank"
+                                style="text-decoration:none; color:inherit;">Zap Safra</a></h3>
+                        <p>Agrônomo digital no WhatsApp com Gemini 3.0 e visão computacional.</p>
+                        <div class="tech-brutal"><span>Vision</span><span>Analytics</span><span>Cloud Run</span></div>
+                    </article>
+                    <article class="card-brutal">
+                        <div class="card-tag">INFRA</div>
+                        <h3><a href="https://bkpexpress.com" target="_blank"
+                                style="text-decoration:none; color:inherit;">BKP Express</a></h3>
+                        <p>Backup inteligente para Workspace. 60-80% de economia vs Archived Users.</p>
+                        <div class="tech-brutal"><span>Automação</span><span>Segurança</span></div>
+                    </article>
+                    <article class="card-brutal">
+                        <div class="card-tag">FARMA</div>
+                        <h3>Enterprise RAG Hub</h3>
+                        <p>Busca inteligente em bases corporativas.</p>
+                        <div class="tech-brutal"><span>RAG</span><span>Gemini</span><span>Enterprise</span></div>
+                    </article>
+                    <article class="card-brutal">
+                        <div class="card-tag">BEBIDAS</div>
+                        <h3>Gondola AI</h3>
+                        <p>Vision em Gôndola e execução.</p>
+                        <div class="tech-brutal"><span>Vision</span><span>Edge AI</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">PORTFÓLIO</div>
+                    <h2>PROJETOS ENTREGUES</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="card-brutal">
+                        <div class="card-tag">VAREJO</div>
+                        <h3>Supermarket AI</h3>
+                        <p>Visão computacional para auditoria de gôndolas e ruptura.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">INDÚSTRIA</div>
+                        <h3>Check AI</h3>
+                        <p>Inspeção visual em linha de produção.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">FINANCEIRO</div>
+                        <h3>Banker Agent</h3>
+                        <p>GenAI para análises automatizadas.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">SAÚDE</div>
+                        <h3>Health AI</h3>
+                        <p>Busca semântica e apoio à decisão.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="ventures-brutal" id="ventures">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">VENTURES</div>
+                    <h2>STARTUPS FUNDADAS</h2>
+                    <p style="margin-top:16px; font-size:18px;">Track record de inovação: capacidade de transformar
+                        ideias em negócios escaláveis.</p>
+                </div>
+                <div class="grid-2">
+                    <article class="venture-card exit">
+                        <div class="venture-status">EXIT ✓</div>
+                        <h3>CloudPlain</h3>
+                        <p>Automatização de rotinas em Cloud.</p>
+                        <div class="venture-highlight">💰 STARTUP VENDIDA</div>
+                    </article>
+                    <article class="venture-card">
+                        <div class="venture-status">ACELERADA</div>
+                        <h3><a href="https://cloudcontrol.app" target="_blank"
+                                style="text-decoration:none; color:inherit;">CloudControl</a></h3>
+                        <p>Plataforma All-in-One para parceiros Cloud. Acelerada Cultura Builder + AWS.</p>
+                        <div class="venture-highlight">🚀 LANÇAMENTO Q1 2026</div>
+                    </article>
+                    <article class="venture-card">
+                        <div class="venture-status">PIONEIRA</div>
+                        <h3>IPE Assets</h3>
+                        <p>Tokenização de energia. +R$ 2M captados, 4 usinas, 1 eletroposto. Clientes globais (EUA,
+                            Europa, Ásia).</p>
+                        <div class="venture-highlight">☀️ 1ª DO MUNDO</div>
+                    </article>
+                    <article class="venture-card">
+                        <div class="venture-status">PREMIADA</div>
+                        <h3>Trazzelo</h3>
+                        <p>Cuidado a idosos.</p>
+                        <div class="venture-highlight">🏆 R$100K SINAPSE</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="consultoria">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">CONSULTORIA</div>
+                    <h2>COMO POSSO AJUDAR</h2>
+                </div>
+                <div class="grid-3">
+                    <div class="card-brutal">
+                        <div class="card-tag">GENAI</div>
+                        <h3>RAG & Busca</h3>
+                        <p>Base de conhecimento com avaliação.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">AGENTS</div>
+                        <h3>Agentes</h3>
+                        <p>Workflows com guardrails.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">SQUADS</div>
+                        <h3>Mentoria & Enablement</h3>
+                        <p>Capacitação de times. Cultura de shipping.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">CLOUD</div>
+                        <h3>Engenharia de AI</h3>
+                        <p>Infra para inferência e vetores.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">SPRINT</div>
+                        <h3>AI MVP</h3>
+                        <p>2-4 semanas.</p>
+                    </div>
+                    <div class="card-brutal">
+                        <div class="card-tag">OPS</div>
+                        <h3>LLMOps</h3>
+                        <p>Observabilidade e Evals.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="processo">
+            <div class="container">
+                <div class="section-header" style="text-align:center;">
+                    <div class="section-tag">PROCESSO</div>
+                    <h2>COMO FUNCIONA</h2>
+                </div>
+                <div class="process-brutal">
+                    <div class="process-step">
+                        <div class="process-num">1</div>
+                        <h3>Diagnóstico</h3>
+                        <p>Caso de uso, dados, ROI.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-num">2</div>
+                        <h3>MVP</h3>
+                        <p>Construção rápida.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="process-num">3</div>
+                        <h3>Escala</h3>
+                        <p>Governança e handoff.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-brutal">
+            <h2>BORA COLOCAR AI EM PRODUÇÃO?</h2>
+            <p>Diagnóstico rápido, plano claro, execução com foco em valor.</p>
+            <div class="cta-actions">
+                <a href="https://www.linkedin.com/in/michelpabst/" target="_blank" class="btn">VER LINKEDIN</a>
+            </div>
+        </section>
+
+        <section id="contato">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-tag">CONTATO</div>
+                    <h2>VAMOS CONVERSAR</h2>
+                </div>
+                <div class="grid-2">
+                    <div class="contact-brutal">
+                        <h3>PARA EMPRESAS</h3>
+                        <ul class="contact-list">
+                            <li>→ Definição de caso de uso</li>
+                            <li>→ Mapeamento de dados</li>
+                            <li>→ Arquitetura de AI e Cloud</li>
+                            <li>→ Plano de MVP</li>
+                        </ul>
+                        <div style="margin-top:20px;"><a href="https://www.linkedin.com/in/michelpabst/" target="_blank"
+                                class="btn">AGENDAR</a></div>
+                    </div>
+                    <div class="contact-brutal">
+                        <h3>DIRETO</h3>
+                        <ul class="contact-list">
+                            <li>→ <a href="https://www.linkedin.com/in/michelpabst" target="_blank">LinkedIn</a></li>
+                            <li>→ PT/EN/ES</li>
+                        </ul>
+                        <div style="margin-top:20px;"><a href="Curri_culo_Michel_Pabst.pdf" target="_blank"
+                                class="btn btn-white">BAIXAR CV</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <span>© 2026 MICHEL PABST</span>
+                <div class="footer-links"><a href="https://www.linkedin.com/in/michelpabst">LinkedIn</a><a
+                        href="Curri_culo_Michel_Pabst.pdf">CV</a></div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

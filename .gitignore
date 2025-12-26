@@ -1,0 +1,10 @@
+# Ignorar todos os arquivos HTML por padrão
+*.html
+
+# Mas incluir (não ignorar) especificamente estes dois:
+!index.html
+!index2.html
+
+# Ignorar arquivos de sistema/IDE se tiver
+.DS_Store
+.vscode/
