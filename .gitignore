@@ -4,7 +4,14 @@
 # Mas incluir (não ignorar) especificamente estes dois:
 !index.html
 !index2.html
+!index_en.html
+!index2_en.html
+!index_es.html
+!index2_es.html
 
 # Ignorar arquivos de sistema/IDE se tiver
 .DS_Store
 .vscode/
+
+# Ignorar PDFs (Dados sensíveis)
+*.pdf
