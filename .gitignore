@@ -1,7 +1,7 @@
-# Ignorar todos os arquivos HTML por padrão
+# Ignorar todos os arquivos HTML por padrao
 *.html
 
-# Mas incluir (não ignorar) especificamente estes dois:
+# Mas incluir (nao ignorar) especificamente estes:
 !index.html
 !index2.html
 !index_en.html
@@ -9,9 +9,18 @@
 !index_es.html
 !index2_es.html
 
-# Ignorar arquivos de sistema/IDE se tiver
+# Ignorar arquivos de sistema/IDE
 .DS_Store
 .vscode/
+desktop.ini
 
-# Ignorar PDFs (Dados sensíveis)
+# Ignorar PDFs e documentos Word
 *.pdf
+*.docx
+
+# Ignorar documentos pessoais/sensiveis
+Estrategia-LinkedIn-Premium-Michel-Pabst.md
+Michel-Pabst-CV-2026-En.md
+
+# Ignorar scripts auxiliares
+*.py
