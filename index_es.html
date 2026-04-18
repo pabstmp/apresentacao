@@ -8,15 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f0f7f4;
-            --surface: #fff;
-            --text: #1e3a2f;
-            --muted: #5a7d6c;
-            --green: #2d6a4f;
-            --teal: #40916c;
-            --sage: #95d5b2;
-            --cream: #fefae0;
-            --border: #d8e2dc;
+            --bg: #0e0e0e;
+            --surface: #1a1a1a;
+            --text: #ffffff;
+            --muted: #a1a1aa;
+            --green: #e08efe;
+            --teal: #81ecff;
+            --sage: #f472b6;
+            --cream: #1e1e24;
+            --border: #333333;
         }
 
         * {
@@ -97,7 +97,7 @@
         }
 
         .header-pill {
-            background: var(--surface);
+            background: var(--surface, #fff);
             border-radius: 100px;
             padding: 12px 24px;
             display: flex;
@@ -253,7 +253,7 @@
         }
 
         .stat-pill {
-            background: var(--surface);
+            background: var(--surface, #fff);
             border-radius: 100px;
             padding: 16px 24px;
             display: flex;
@@ -306,13 +306,13 @@
 
         .wave-divider {
             height: 80px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23fff' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%231a1a1a' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
             background-size: cover;
         }
 
         .wave-divider-reverse {
             transform: scaleY(-1);
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23f0f7f4' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%230e0e0e' d='M0,50 C360,100 720,0 1080,50 C1260,75 1350,75 1440,50 L1440,100 L0,100 Z'/%3E%3C/svg%3E") no-repeat bottom;
             background-size: cover;
         }
 
@@ -329,7 +329,7 @@
         }
 
         .card {
-            background: var(--surface);
+            background: var(--surface, #fff);
             border-radius: 24px;
             padding: 32px;
             transition: all 0.3s;
@@ -391,7 +391,7 @@
 
         /* VENTURES */
         .ventures-section {
-            background: var(--surface);
+            background: var(--surface, #fff);
             padding: 100px 0;
         }
 
@@ -446,7 +446,7 @@
         }
 
         .process-card {
-            background: var(--surface);
+            background: var(--surface, #fff);
             border-radius: 24px;
             padding: 40px;
             text-align: center;
@@ -509,7 +509,7 @@
         }
 
         .cta-card .btn-green {
-            background: #fff;
+            background: var(--surface, #fff);
             color: var(--green);
         }
 
@@ -519,7 +519,7 @@
         }
 
         .contact-box {
-            background: var(--surface);
+            background: var(--surface, #fff);
             border-radius: 24px;
             padding: 40px;
             box-shadow: 0 4px 20px rgba(45, 106, 79, 0.06);
@@ -706,7 +706,7 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 .carousel-btn:hover {
-    background: #fff;
+    background: var(--surface, #fff);
     transform: translateY(-50%) scale(1.1);
 }
 .carousel-prev { left: 20px; }
@@ -729,7 +729,7 @@
     transition: all 0.3s ease;
 }
 .carousel-dot.active {
-    background: #fff;
+    background: var(--surface, #fff);
     transform: scale(1.3);
 }
 .event-info {
@@ -859,13 +859,13 @@
                         <h2 style="font-size: clamp(36px, 4vw, 56px); margin-bottom: 16px; color: #fff; line-height: 1.1;">IA: Desde Cero<br>al Deploy</h2>
                         <p style="font-size: 18px; opacity: 0.9; margin-bottom: 24px; max-width: 500px; color: #fff;">Transforma ideas complejas en productos reales de Inteligencia Artificial. Domina el stack que usan las Big Techs para escalar agentes y automatizaciones.</p>
                         <ul style="list-style: none; margin-bottom: 0; color: #fff; opacity: 0.95; padding: 0;">
-                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><div class="contact-dot" style="background: #fff; width: 8px; height: 8px;"></div> Para equipos de Tecnología y Negocios</li>
-                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><div class="contact-dot" style="background: #fff; width: 8px; height: 8px;"></div> Prototipado rápido, Agentes Autónomos y LLMs</li>
-                            <li style="display: flex; align-items: center; gap: 8px;"><div class="contact-dot" style="background: #fff; width: 8px; height: 8px;"></div> Entrega valor real en producción en semanas</li>
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><div class="contact-dot" style="background: var(--surface, #fff); width: 8px; height: 8px;"></div> Para equipos de Tecnología y Negocios</li>
+                            <li style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><div class="contact-dot" style="background: var(--surface, #fff); width: 8px; height: 8px;"></div> Prototipado rápido, Agentes Autónomos y LLMs</li>
+                            <li style="display: flex; align-items: center; gap: 8px;"><div class="contact-dot" style="background: var(--surface, #fff); width: 8px; height: 8px;"></div> Entrega valor real en producción en semanas</li>
                         </ul>
                     </div>
                     <div style="text-align: right;">
-                        <a href="https://zeroaodeploy.com" target="_blank" class="btn btn-green" style="background: #fff; color: var(--teal); font-size: 18px; padding: 20px 40px; border-radius: 100px; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block;">Garantizar Mi Lugar →</a>
+                        <a href="https://zeroaodeploy.com" target="_blank" class="btn btn-green" style="background: var(--surface, #fff); color: var(--teal); font-size: 18px; padding: 20px 40px; border-radius: 100px; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: inline-block;">Garantizar Mi Lugar →</a>
                     </div>
                 </div>
             </div>
@@ -1208,3 +1208,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </body>
 
 </html>
+
+
+
